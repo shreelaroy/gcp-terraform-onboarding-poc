@@ -12,15 +12,17 @@ resource "google_compute_instance" "web" {
   enable_display             = false
   hostname                   = null
   key_revocation_action_type = null
-  labels                     = {}
-  machine_type               = "e2-micro"
-  metadata                   = {}
-  metadata_startup_script    = null
-  name                       = "poc-web-vm"
-  project                    = "devprojectpoc-8288"
-  resource_policies          = []
-  tags                       = []
-  zone                       = "us-central1-a"
+  labels = {
+    managed_by = "terraform"
+  }
+  machine_type            = "e2-micro"
+  metadata                = {}
+  metadata_startup_script = null
+  name                    = "poc-web-vm"
+  project                 = "devprojectpoc-8288"
+  resource_policies       = []
+  tags                    = []
+  zone                    = "us-central1-a"
   boot_disk {
     auto_delete                     = true
     device_name                     = "persistent-disk-0"
