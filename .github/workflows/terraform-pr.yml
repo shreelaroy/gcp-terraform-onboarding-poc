@@ -1,0 +1,38 @@
+name: Terraform PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        root: [organization, shared-network, development, data]
+
+    defaults:
+      run:
+        working-directory: environments/${{ matrix.root }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: '1.14.6'
+          terraform_wrapper: false
+
+      - name: Terraform format
+        run: terraform fmt -check
+
+      - name: Initialize without backend
+        run: terraform init -backend=false -input=false
+
+      - name: Validate
+        run: terraform validate -no-color

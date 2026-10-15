@@ -1,0 +1,15 @@
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+inventory/
+gha-creds-*.json
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+inventory/
+gha-creds-*.json
+*.pem
+*.key
